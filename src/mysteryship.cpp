@@ -11,11 +11,33 @@ MysteryShip::~MysteryShip()
     UnloadTexture(image);
 }
 
-void MysteryShip::Draw()
+void MysteryShip::Spawn()
+{
+    position.y = 70;
+    int side = GetRandomValue(0, 1);
+
+    if (side == 0)
+    {
+        position.x = 25;
+        speed = 3;
+    }
+    else
+    {
+        position.x = GetScreenWidth() - image.width - 25;
+        speed = -3;
+    }
+    alive = true;
+}
+
+Rectangle MysteryShip::getRect()
 {
     if (alive)
     {
-        DrawTextureV(image, position, WHITE);
+        return {position.x, position.y, float(image.width), float(image.height)};
+    }
+    else
+    {
+        return {position.x, position.y, 0, 0};
     }
 }
 
@@ -31,33 +53,10 @@ void MysteryShip::Update()
     }
 }
 
-void MysteryShip::Spawn()
-{
-    position.y = 0;
-    int side = GetRandomValue(0, 1);
-
-    if (side == 0)
-    {
-        position.x = 25;
-        speed = 3;
-    }
-    else
-    {
-        position.x = GetScreenWidth() - image.width - 25;
-        speed = -3;
-    }
-
-    alive = true;
-}
-
-Rectangle MysteryShip::getRect()
+void MysteryShip::Draw()
 {
     if (alive)
     {
-        return {position.x, position.y, float(image.width), float(image.height)};
-    }
-    else
-    {
-        return {position.x, position.y, 0, 0};
+        DrawTextureV(image, position, WHITE);
     }
 }

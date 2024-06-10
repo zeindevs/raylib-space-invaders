@@ -7,6 +7,8 @@ Game::Game()
 {
     music = LoadMusicStream("assets/sounds/music.ogg");
     explosionSound = LoadSound("assets/sounds/explosion.ogg");
+    music.looping = true;
+    PlayMusicStream(music);
     InitGame();
 }
 
@@ -42,6 +44,8 @@ void Game::Draw()
         {
             laser.Draw();
         }
+
+        mysteryShip.Draw();
     }
 }
 
@@ -241,6 +245,7 @@ void Game::CheckForCollisions()
             if (lives == 0)
             {
                 GameOver();
+                PlaySound(explosionSound);
             }
         }
 
