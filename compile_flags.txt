@@ -1,0 +1,3 @@
+-std=c++17
+-ID:/Lib/raylib-5.0_win64_msvc17/include
+-I./include
